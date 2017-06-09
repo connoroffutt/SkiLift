@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, IndexRoute, hashHistory} from 'react-router';
+import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import {App,Home,NewRide,Login,NewHome,PrivateDrives,PrivatePage,PrivateRides,Register,RidePage} from './App';
 import './index.css';
 
 
 ReactDOM.render(
-    <Router history={hashHistory}>
+    <Router history={browserHistory}>
         <Route path="/" component={App}>
             <IndexRoute component={NewHome} />
             <Route path="/home" component={Home} />
