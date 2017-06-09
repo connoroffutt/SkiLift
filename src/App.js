@@ -729,7 +729,7 @@ class PrivatePage extends Component {
     const self = this;
     if(localStorage.authToken !== undefined && localStorage.authToken !== null){ 
         axios
-          .get('/private',{headers:{'authorization':localStorage.authToken}})
+          .get('/privatepage',{headers:{'authorization':localStorage.authToken}})
           .then((res) => {
             if(res.status === 200){
                 self.setState({
@@ -819,7 +819,7 @@ class Register extends Component {
       .then( (res) =>{
         console.log(res);
       })
-      window.location.href = '/login'
+      window.location.href = '/loginPage'
   }
 
   txtFieldChange(e){

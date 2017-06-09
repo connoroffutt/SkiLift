@@ -14,7 +14,7 @@ ReactDOM.render(
             <Route path="/private/drives" component={PrivateDrives} />
             <Route path='/rides/:id' component={RidePage} />
             <Route path="/newride" component={NewRide} />
-            <Route path="/login" component={Login} />
+            <Route path="/loginPage" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/private" component={PrivatePage} />
         </Route>

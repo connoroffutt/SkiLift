@@ -68,10 +68,6 @@ app.get('/rides/:id', (req, res) => {
         })
 })
 
-app.get('/login', (req, res)=> {
-
-});
-
 //POST endpoint for password encryption and creating user profiles
 app.post('/encrypt',(req,res) => {
     let username = req.body.username;
@@ -378,7 +374,7 @@ app.get('/private/rides', (req, res) => {
         })
 })
 
-app.get('/private', authorize, (req,res) => {
+app.get('/privatepage', authorize, (req,res) => {
     console.log(req.decoded)
     res.json(req.decoded)
 });  
