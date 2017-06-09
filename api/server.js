@@ -14,9 +14,7 @@ const PORT = process.env.PORT || 8888;
 app.use(express.static(__dirname + './../build'));
 app.use(bodyParser.json());
 
-app.get('*', (req, res) => {
-    res.sendFile('index.html',{root: __dirname + './../build'});
-});
+
 
 
 
@@ -385,7 +383,9 @@ app.get('/private', authorize, (req,res) => {
     res.json(req.decoded)
 });  
 
-
+app.get('*', (req, res) => {
+    res.sendFile('index.html',{root: __dirname + './../build'});
+});
 
 app.listen(PORT, () => {
    console.log('Server running on:' + PORT);
