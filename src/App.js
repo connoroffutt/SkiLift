@@ -61,7 +61,7 @@ class Home extends Component {
 
   componentDidMount(){
     let self = this;
-    axios.get('/api/', {headers:{'location':localStorage.search_location}})
+    axios.get('/', {headers:{'location':localStorage.search_location}})
       .then(function (response) {
         console.log(response.data);
         console.log(self)
@@ -82,12 +82,12 @@ class Home extends Component {
 
   reserveRide(ride, user_ID) {
       
-      const putURL1 = '/api/rides1/' + ride.id;
-      const putURL2 = '/api/rides2/' + ride.id;
-      const putURL3 = '/api/rides3/' + ride.id;
-      const putURL4 = '/api/rides4/' + ride.id;
-      const putURL5 = '/api/rides5/' + ride.id;
-      const putURL6 = '/api/rides6/' + ride.id;
+      const putURL1 = '/rides1/' + ride.id;
+      const putURL2 = '/rides2/' + ride.id;
+      const putURL3 = '/rides3/' + ride.id;
+      const putURL4 = '/rides4/' + ride.id;
+      const putURL5 = '/rides5/' + ride.id;
+      const putURL6 = '/rides6/' + ride.id;
 
       let reserveRideData1 = {
         id: ride.id,
@@ -228,7 +228,7 @@ class Login extends Component {
     let self = this;
     e.preventDefault();
     axios
-      .post('/api/login', this.state)
+      .post('/login', this.state)
       .then((res) => {
         console.log(res);
         localStorage.authToken = res.data.token;
@@ -302,12 +302,12 @@ class RidePage extends Component {
 
   reserveRide(ride, user_ID) {
       
-      const putURL1 = '/api/rides1/' + ride.id;
-      const putURL2 = '/api/rides2/' + ride.id;
-      const putURL3 = '/api/rides3/' + ride.id;
-      const putURL4 = '/api/rides4/' + ride.id;
-      const putURL5 = '/api/rides5/' + ride.id;
-      const putURL6 = '/api/rides6/' + ride.id;
+      const putURL1 = '/rides1/' + ride.id;
+      const putURL2 = '/rides2/' + ride.id;
+      const putURL3 = '/rides3/' + ride.id;
+      const putURL4 = '/rides4/' + ride.id;
+      const putURL5 = '/rides5/' + ride.id;
+      const putURL6 = '/rides6/' + ride.id;
 
       let reserveRideData1 = {
         id: ride.id,
@@ -409,7 +409,7 @@ class RidePage extends Component {
 
   componentWillMount(){
     axios
-      .get('/api/'+localStorage.ride_id, {headers:{'id':localStorage.ride_id}})
+      .get('/'+localStorage.ride_id, {headers:{'id':localStorage.ride_id}})
       .then(response => {
         console.log(response.data)
           this.setState({
@@ -461,7 +461,7 @@ class NewRide extends Component {
   newRideSubmit(e){
     e.preventDefault();
     axios
-      .post('/api/newride',this.state)
+      .post('/newride',this.state)
       .then( (res) =>{
         console.log(res);
       })
@@ -618,7 +618,7 @@ class PrivateRides extends Component {
 
   componentDidMount(){
     axios
-      .get('/api/private/rides', {headers:{'rider1':localStorage.userID, 'rider2':localStorage.userID, 'rider3':localStorage.userID, 'rider4':localStorage.userID, 'rider5':localStorage.userID, 'rider6':localStorage.userID}})
+      .get('/private/rides', {headers:{'rider1':localStorage.userID, 'rider2':localStorage.userID, 'rider3':localStorage.userID, 'rider4':localStorage.userID, 'rider5':localStorage.userID, 'rider6':localStorage.userID}})
       .then((res) => {
           this.setState({
             rides: res.data
@@ -668,7 +668,7 @@ class PrivateDrives extends Component {
 
   componentDidMount(){
       axios
-        .get('/api/private/drives', {headers:{'user_id':localStorage.userID}})
+        .get('/private/drives', {headers:{'user_id':localStorage.userID}})
         .then((res) => {
             this.setState({
               drives: res.data
@@ -730,7 +730,7 @@ class PrivatePage extends Component {
     const self = this;
     if(localStorage.authToken !== undefined && localStorage.authToken !== null){ 
         axios
-          .get('/api/private',{headers:{'authorization':localStorage.authToken}})
+          .get('/private',{headers:{'authorization':localStorage.authToken}})
           .then((res) => {
             if(res.status === 200){
                 self.setState({
@@ -814,7 +814,7 @@ class Register extends Component {
   formSubmit(e){
     e.preventDefault();
     axios
-      .post('/api/encrypt',this.state)
+      .post('/encrypt',this.state)
       .then( (res) =>{
         console.log(res);
       })
