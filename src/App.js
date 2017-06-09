@@ -60,12 +60,11 @@ class Home extends Component {
   }
 
   componentDidMount(){
-    let self = this;
     axios.get('/', {headers:{'location':localStorage.search_location}})
-      .then(function (response) {
+      .then((response) => {
         console.log(response.data);
-        console.log(self)
-        self.setState({
+        console.log(this)
+        this.setState({
           ride: response.data
         });
       })
@@ -970,6 +969,7 @@ class App extends Component {
   }
 
   find_user_location() {
+    localStorage.setIem('search_location', )
     localStorage.search_location = localStorage.userLocation;
     window.location.href = '/home';
   }
