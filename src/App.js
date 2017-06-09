@@ -22,7 +22,7 @@ class NewHome extends Component {
   searchLocationSubmit(e){
     e.preventDefault();
     localStorage.search_location = this.state.search_location;
-    window.location.href = 'http://localhost:3000/home';
+    window.location.href = '/home';
   }
 
 
@@ -61,7 +61,7 @@ class Home extends Component {
 
   componentDidMount(){
     let self = this;
-    axios.get('http://localhost:3005/', {headers:{'location':localStorage.search_location}})
+    axios.get('/api/', {headers:{'location':localStorage.search_location}})
       .then(function (response) {
         console.log(response.data);
         console.log(self)
@@ -82,12 +82,12 @@ class Home extends Component {
 
   reserveRide(ride, user_ID) {
       
-      const putURL1 = 'http://localhost:3005/rides1/' + ride.id;
-      const putURL2 = 'http://localhost:3005/rides2/' + ride.id;
-      const putURL3 = 'http://localhost:3005/rides3/' + ride.id;
-      const putURL4 = 'http://localhost:3005/rides4/' + ride.id;
-      const putURL5 = 'http://localhost:3005/rides5/' + ride.id;
-      const putURL6 = 'http://localhost:3005/rides6/' + ride.id;
+      const putURL1 = '/api/rides1/' + ride.id;
+      const putURL2 = '/api/rides2/' + ride.id;
+      const putURL3 = '/api/rides3/' + ride.id;
+      const putURL4 = '/api/rides4/' + ride.id;
+      const putURL5 = '/api/rides5/' + ride.id;
+      const putURL6 = '/api/rides6/' + ride.id;
 
       let reserveRideData1 = {
         id: ride.id,
@@ -208,7 +208,7 @@ class Home extends Component {
     }
     return(
       <div>
-          <h1> Upcoming SkUber Rides in {localStorage.search_location}</h1>
+          <h1 className="text-center page-head"> Upcoming SkiLift Rides in {localStorage.search_location}</h1>
          {ride}
       </div>
     )
@@ -228,11 +228,11 @@ class Login extends Component {
     let self = this;
     e.preventDefault();
     axios
-      .post('http://localhost:3005/login', this.state)
+      .post('/api/login', this.state)
       .then((res) => {
         console.log(res);
         localStorage.authToken = res.data.token;
-        window.location.href = "http://localhost:3000/private";
+        window.location.href = "/private";
       })
       .catch(()=>{
           self.setState({
@@ -265,7 +265,7 @@ class Login extends Component {
   render() {
     return (
       <div id="auth">
-        <h1>Login Form</h1>
+        <h1 className="page-head">Sign In</h1>
         <p className="alert alert-danger ">{this.state.warning === 'no-warning' ? 'Please Log In.' : 'Incorrect Password, Try Again.'}</p>
         <form onSubmit={this.formSubmit}>
           <div className="form-group">
@@ -299,14 +299,15 @@ class RidePage extends Component {
 
     this.state = {singleride:null};
   }
+
   reserveRide(ride, user_ID) {
       
-      const putURL1 = 'http://localhost:3005/rides1/' + ride.id;
-      const putURL2 = 'http://localhost:3005/rides2/' + ride.id;
-      const putURL3 = 'http://localhost:3005/rides3/' + ride.id;
-      const putURL4 = 'http://localhost:3005/rides4/' + ride.id;
-      const putURL5 = 'http://localhost:3005/rides5/' + ride.id;
-      const putURL6 = 'http://localhost:3005/rides6/' + ride.id;
+      const putURL1 = '/api/rides1/' + ride.id;
+      const putURL2 = '/api/rides2/' + ride.id;
+      const putURL3 = '/api/rides3/' + ride.id;
+      const putURL4 = '/api/rides4/' + ride.id;
+      const putURL5 = '/api/rides5/' + ride.id;
+      const putURL6 = '/api/rides6/' + ride.id;
 
       let reserveRideData1 = {
         id: ride.id,
@@ -408,7 +409,7 @@ class RidePage extends Component {
 
   componentWillMount(){
     axios
-      .get('http://localhost:3005/rides/'+localStorage.ride_id, {headers:{'id':localStorage.ride_id}})
+      .get('/api/'+localStorage.ride_id, {headers:{'id':localStorage.ride_id}})
       .then(response => {
         console.log(response.data)
           this.setState({
@@ -432,7 +433,7 @@ class RidePage extends Component {
                   <li> {this.state.singleride[i].ride_time_location} </li>
                   <li> {this.state.singleride[i].one_way === true ? 'One-Way Trip (Ride Back Not Included/Available)' : 'Two-Way Trip'}</li>
                   <li> {this.state.singleride[i].spots_left} Spots Left</li>
-                  <button disabled={this.state.singleride[i].spots_left === 0 ? true : false} onClick={()=>{this.reserveRide(this.state.singleride[i], localStorage.userID)}}>Reserve a spot now!</button>
+                  <button className="btn btn-primary" disabled={this.state.singleride[i].spots_left === 0 ? true : false} onClick={()=>{this.reserveRide(this.state.singleride[i], localStorage.userID)}}>Reserve a spot now!</button>
           </ul>
         )
       }
@@ -460,11 +461,11 @@ class NewRide extends Component {
   newRideSubmit(e){
     e.preventDefault();
     axios
-      .post('http://localhost:3005/newride',this.state)
+      .post('/api/newride',this.state)
       .then( (res) =>{
         console.log(res);
       })
-      window.location.href = 'http://localhost:3000'
+      window.location.href = '/'
   }
 
   rideTxtFieldChange(e){
@@ -517,7 +518,7 @@ class NewRide extends Component {
   render() {
     return (
       <div id="ride">
-        <h1>Create a New SkiLift Ride!</h1>
+        <h1 className="text-center page-head">Create a New SkiLift Ride!</h1>
         <form onSubmit={this.newRideSubmit}>
           <div className="form-group">
             <input 
@@ -617,7 +618,7 @@ class PrivateRides extends Component {
 
   componentDidMount(){
     axios
-      .get('http://localhost:3005/private/rides', {headers:{'rider1':localStorage.userID, 'rider2':localStorage.userID, 'rider3':localStorage.userID, 'rider4':localStorage.userID, 'rider5':localStorage.userID, 'rider6':localStorage.userID}})
+      .get('/api/private/rides', {headers:{'rider1':localStorage.userID, 'rider2':localStorage.userID, 'rider3':localStorage.userID, 'rider4':localStorage.userID, 'rider5':localStorage.userID, 'rider6':localStorage.userID}})
       .then((res) => {
           this.setState({
             rides: res.data
@@ -667,7 +668,7 @@ class PrivateDrives extends Component {
 
   componentDidMount(){
       axios
-        .get('http://localhost:3005/private/drives', {headers:{'user_id':localStorage.userID}})
+        .get('/api/private/drives', {headers:{'user_id':localStorage.userID}})
         .then((res) => {
             this.setState({
               drives: res.data
@@ -729,7 +730,7 @@ class PrivatePage extends Component {
     const self = this;
     if(localStorage.authToken !== undefined && localStorage.authToken !== null){ 
         axios
-          .get('http://localhost:3005/private',{headers:{'authorization':localStorage.authToken}})
+          .get('/api/private',{headers:{'authorization':localStorage.authToken}})
           .then((res) => {
             if(res.status === 200){
                 self.setState({
@@ -739,11 +740,11 @@ class PrivatePage extends Component {
                 });
             }
         }).catch((err) => {
-            window.location.href = 'http://localhost:3000/';
+            window.location.href = '/';
         })
     }
     else {
-        window.location.href = 'http://localhost:3000';
+        window.location.href = '/';
     }
   }
 
@@ -758,7 +759,7 @@ class PrivatePage extends Component {
       localStorage.phone = this.state.data.phonenumber;
       return (
         <div>
-          <h1 className="text-center">{"Welcome to your SkiLift profile " + this.state.data.firstname + "!"}</h1>
+          <h1 className="text-center page-head">{"Welcome to your SkiLift profile " + this.state.data.firstname + "!"}</h1>
           <div className="row spacing"></div>
           <div className="row text-center">
             <div className="col-xs-1 col-md-2"></div>
@@ -813,11 +814,11 @@ class Register extends Component {
   formSubmit(e){
     e.preventDefault();
     axios
-      .post('http://localhost:3005/encrypt',this.state)
+      .post('/api/encrypt',this.state)
       .then( (res) =>{
         console.log(res);
       })
-      window.location.href = 'http://localhost:3000/login'
+      window.location.href = '/login'
   }
 
   txtFieldChange(e){
@@ -985,8 +986,8 @@ class App extends Component {
             <nav className="navbar navbar-right">
               <div className="container-fluid">
                 <div className="navbar-header">
-                 <button className={localStorage.length <= 1 ? "btn btn-primary hidden-nav" : "btn btn-primary show-nav"} onClick={()=>{this.logout()}}>Logout</button>
-                    <a className={localStorage.length <= 1 ? "btn btn-primary show-nav" : "btn btn-primary hidden-nav"}><Link to="/login" className={localStorage.length <= 1 ? "white show-nav" : "hidden-nav"}>Login</Link></a>
+                 <button className={localStorage.length <= 1 ? "btn btn-primary hidden-nav" : "btn btn-primary show-nav"} onClick={()=>{this.logout()}}>Log Out</button>
+                    <a className={localStorage.length <= 1 ? "btn btn-primary show-nav" : "btn btn-primary hidden-nav"}><Link to="/login" className={localStorage.length <= 1 ? "white show-nav" : "hidden-nav"}>Log In</Link></a>
                     <a className={localStorage.length === 0 ? "hidden-nav" : "show-nav"}><Link to="/private" className={localStorage.length <= 1 ? "hidden-nav" : "show-nav"}>My Profile</Link></a>
                     <a className={localStorage.length <= 1 ? "hidden-nav" : "show-nav"}><Link to="/newride" className={localStorage.length <= 1 ? "hidden-nav" : "show-nav"}>Create a Ride</Link></a>
                     <a className={localStorage.length === 0 ? "show-nav" : "hidden-nav"}><Link to="/register" className={localStorage.length === 0 ? "btn btn-primary show-nav" : "hidden-nav"}>Register</Link></a>

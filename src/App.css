@@ -178,12 +178,30 @@ a.thumbnail {
   background-color: rgba(255, 255, 255, 0.4)
 }
 
+@media only screen and (max-width: 1000px) {
+  h1.text-center.page-head {
+    padding-top: 10%;
+  }
+   h1.page-head{
+    padding-top: 10%;
+  }
+}
+
+
+
 @media only screen and (max-width: 800px) {
 
   .form-group.newhome {
     left: 30%;
   }
 
+  h1.text-center.page-head {
+    padding-top: 15%;
+  }
+
+ h1.page-head{
+    padding-top: 15%;
+  }
 }
 
 @media only screen and (max-width: 700px) {
@@ -203,6 +221,14 @@ a.thumbnail {
     min-width: 40px;
   }
 
+   h1.text-center.page-head {
+    padding-top: 17.5%;
+  }
+
+   h1.page-head{
+    padding-top: 17.5%;
+  }
+
 }
 
 
@@ -213,6 +239,14 @@ a.thumbnail {
   }
 
   h1.new-home-header {
+    padding-top: 19%;
+  }
+
+   h1.text-center.page-head {
+    padding-top: 19%;
+  }
+  
+  h1.page-head{
     padding-top: 19%;
   }
 }
