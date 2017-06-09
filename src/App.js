@@ -737,6 +737,8 @@ class PrivatePage extends Component {
                     auth:true,
                     data:res.data
                 });
+                console.log(res.data)
+                console.log(this.state)
             }
         }).catch((err) => {
             window.location.href = '/';
