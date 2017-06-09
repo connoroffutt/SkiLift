@@ -10,6 +10,7 @@ exports.up = function(knex, Promise) {
         table.string('firstname').notNullable();
         table.string('lastname').notNullable();
         table.string('location').notNullable();
+        table.string('phonenumber').notNullable();
         table.boolean('usertype').notNullable();
         table.string('vehicletype');
         table.string('licensenumber');
