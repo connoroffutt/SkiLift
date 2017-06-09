@@ -9,9 +9,11 @@ const authorize     = require('./middleware/authorize');
 
 //application
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT || 8888;
+
 app.use(express.static(__dirname + './../build'));
 app.use(bodyParser.json());
+
 app.get('*', (req, res) => {
     res.sendFile('index.html',{root: __dirname + './../build'});
 });
@@ -386,6 +388,6 @@ app.get('/private', authorize, (req,res) => {
 
 
 app.listen(PORT, () => {
-    console.log('Server Started on http://localhost:%s',PORT);
-    console.log('Press CTRL + C to stop server');
+   console.log('Server running on:' + PORT);
+   console.log('Kill server with CTRL + C');
 });
